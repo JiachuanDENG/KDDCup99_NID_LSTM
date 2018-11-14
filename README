@@ -1,0 +1,46 @@
+Author: Jiachuan Deng
+
+This is an implementation according to paper: https://www.researchgate.net/profile/Ralf_Staudemeyer/publication/279770740_Applying_long_short-term_memory_recurrent_neural_networks_to_intrusion_detection/links/559a972908ae99aa62ce1468/Applying-long-short-term-memory-recurrent-neural-networks-to-intrusion-detection.pdf
+Note that Since cells in one block shares gates, we use one cell with larger hidden size to replace multiple cells in original paper.
+By default model is training on 10% data, and test on 90% data. You can change the ratio in config.ini.
+
+
+REQUIRED PACKAGES:
+	. Tensorflow version 1.8.0
+	. Sklearn version 0.19.1
+	. Numpy
+	. Pandas
+
+DIRECTORY STRUCTURE:
+	NID_LSTM
+	| README
+	|
+	| data
+	|	| kddcup.data 
+	|
+	| src
+		| config.ini
+		| dataprocessing.py
+		| minibatcher.py
+		| run_model.py
+		| targetEncoder.py
+		| runMe.py
+		| README
+
+
+FILES DESCRIPTION:
+	. kddcup.data: can be downloaded from http://kdd.ics.uci.edu/databases/kddcup99
+	. config.ini: you can change data path and parameters of model in this file
+	. minibatcher.py: python scripts used in the main executable to load the dataset and create minibatches
+	. run_model.py: define the tensorflow model graph, main executable script
+	. targetEncoder.py: Implementation of Empirical Bayes method according to https://kaggle2.blob.core.windows.net/forum-message-attachments/225952/7441/high%20cardinality%20categoricals.pdf. can be used to deal with categorical features
+	. runMe.py: script to run all scripts
+
+
+
+RUNNING THE CODE:
+	> run command "python3 runMe.py" in src directory.
+	> all parameters can be changed in config.ini
+	> Before running the code, make sure the "[DataPath] traindatapath" in config.ini is changed according to exactly where you place kddcup.data.
+
+
